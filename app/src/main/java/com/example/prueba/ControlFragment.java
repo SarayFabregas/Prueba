@@ -1,5 +1,7 @@
-package com.example.prueba.package.fragment;
+package com.example.prueba;
 
+import com.example.prueba.model.ApiResponse;
+import retrofit2.Call;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,12 +13,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import retrofit2.Callback;
+import retrofit2.Response;
 import com.example.prueba.ApiService;
 import com.example.prueba.ApiServiceClient;
-import com.example.prueba.model.ApiResponse;
 
-
-import retrofit2.Call;package.model.ApiResponse;
 
 public class ControlFragment extends Fragment {
 

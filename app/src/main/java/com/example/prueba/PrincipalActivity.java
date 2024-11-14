@@ -62,6 +62,8 @@ public class PrincipalActivity extends AppCompatActivity {
                 }
             };
 
+
+
     private void sendToLCD(String message) {
         // Aquí iría la lógica para enviar mensajes al LCD via WiFi
         // Por ahora, solo lo imprimimos en la consola

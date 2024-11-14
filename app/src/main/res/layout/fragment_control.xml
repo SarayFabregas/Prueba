@@ -6,6 +6,7 @@
     android:orientation="vertical">
 
     <TextView
+        android:id="@+id/sensor_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Sensor Status:"
@@ -18,6 +19,7 @@
         android:textSize="16sp" />
 
     <TextView
+        android:id="@+id/motor_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Motor Status:"
@@ -30,6 +32,7 @@
         android:textSize="16sp" />
 
     <TextView
+        android:id="@+id/led_status"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="LED Status:"
@@ -42,7 +45,7 @@
         android:textSize="16sp" />
 
     <Button
-        android:id="@+id/update_button"
+        android:id="@+id/update_status_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Update Status"
