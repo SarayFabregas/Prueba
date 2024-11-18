@@ -1,17 +1,23 @@
 package com.example.prueba;
 
-
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import com.example.prueba.model.SensorData;
+import com.example.prueba.ApiService;
+import com.example.prueba.ApiServiceClient;
+import java.util.List;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class ReportFragment extends Fragment {
 
@@ -45,13 +51,34 @@ public class ReportFragment extends Fragment {
     }
 
     private void generateReport(String sensorParam, int year, int month, int day) {
-        // Aquí iría la lógica para generar el reporte
-        // Por ahora, solo mostramos un mensaje de confirmación
-        sendToLCD("Generando reporte para el parámetro del sensor '" + sensorParam + "' y fecha " + day + "/" + (month+1) + "/" + year);
+        String date = year + "-" + (month + 1) + "-" + day; // Formato de fecha
 
-        // Implementar la generación real del reporte aquí
+        ApiService apiService = ApiServiceClient.getClient().create(ApiService.class);
+        Call<List<SensorData>> call = apiService.getSensorData(sensorParam, date);
+        call.enqueue(new Callback<List<SensorData>>() {
+            @Override
+            public void onResponse(Call<List<SensorData>> call, Response<List<SensorData>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<SensorData> sensorDataList = response.body();
+                    // Aquí puedes generar el archivo Excel o PDF con los datos obtenidos
+                    createExcelReport(sensorDataList);
+                } else {
+                    // Manejar error
+                    Log.e("ReportFragment", "Error en la respuesta de la API");
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<SensorData>> call, Throwable t) {
+                // Manejar error de red o conexión
+                Log.e("ReportFragment", "Error en la conexión a la API", t);
+            }
+        });
     }
-
+    private void createExcelReport(List<SensorData> sensorDataList) {
+        // Lógica para crear un archivo Excel con los datos
+        // Puedes usar una librería como Apache POI o JExcelApi
+    }
     private void sendToLCD(String message) {
         // Aquí iría la lógica para enviar mensajes al LCD via WiFi
         // Por ahora, solo lo imprimimos en la consola
