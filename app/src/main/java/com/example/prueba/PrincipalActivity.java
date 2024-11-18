@@ -1,5 +1,5 @@
 package com.example.prueba;
-
+import com.example.prueba.R;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -7,6 +7,8 @@ import androidx.fragment.app.Fragment; // Cambio importante aquí
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import androidx.navigation.NavController;
 
 public class PrincipalActivity extends AppCompatActivity {
 

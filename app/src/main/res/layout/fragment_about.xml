@@ -12,7 +12,10 @@
         <TextView
             android:id="@+id/about_text_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="338dp"
+            android:layout_gravity="center"
+            android:background="#6495ED"
+            android:text="¿Qué es un detector de obstáculos IR?\n\nUn detector de obstáculos infrarrojo es un dispositivo que detecta la presencia de un objeto mediante la reflexión que produce en la luz. El uso de luz infrarroja (IR) es simplemente para que esta no sea visible para los humanos.\n\nConstitutivamente son sensores sencillos. Se dispone de un LED emisor de luz infrarroja y de un fotodiodo (tipo BPV10NF o similar) que recibe la luz reflejada por un posible obstáculo."
             android:textSize="18sp" />
 
     </LinearLayout>
