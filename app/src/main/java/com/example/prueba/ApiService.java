@@ -74,4 +74,6 @@ public interface ApiService {
     Call<List<ApiResponse>> getUltimos5RegistrosLed();
 
     Call<List<SensorData>> getSensorData(String sensorParam, String date);
+
+    Call<ApiResponse> updateStatus(int i, String activo);
 }
