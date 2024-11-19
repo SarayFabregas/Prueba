@@ -10,11 +10,12 @@
         android:id="@+id/username_edit_text"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
         android:hint="Usuario"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_marginTop="16dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/password_edit_text"

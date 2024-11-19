@@ -1,56 +1,33 @@
 package com.example.prueba;
-import com.example.prueba.R;
+
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
-import androidx.fragment.app.Fragment; // Cambio importante aquí
+import androidx.fragment.app.Fragment;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import androidx.navigation.NavController;
+import com.google.android.material.navigation.NavigationBarView;
+
 
 public class PrincipalActivity extends AppCompatActivity {
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        // Obtener el nombre de usuario de la actividad anterior
-        String username = getIntent().getStringExtra("username");
-
-        // Mostrar el nombre de usuario en el LCD
-        sendToLCD(username + " inició sesión");
-
-        // Configurar el menú de navegación
-        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
-        bottomNav.setOnNavigationItemSelectedListener(navListener);
-        bottomNav.setSelectedItemId(R.id.nav_control); // Establecer el elemento seleccionado inicialmente
-        bottomNav.inflateMenu(R.menu.bottom_navigation_menu);
-
-        // Cargar el fragmento inicial
-        getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragment_container, new ControlFragment())
-                .commit();
-    }
-
-    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
-            new BottomNavigationView.OnNavigationItemSelectedListener() {
+    // Declarar el navListener como campo de la clase principal
+    private BottomNavigationView.OnItemSelectedListener navListener =
+            new NavigationBarView.OnItemSelectedListener() {
+                @SuppressLint("NonConstantResourceId")
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     Fragment selectedFragment = null;
+                    int itemId = item.getItemId();
 
-                    switch (item.getItemId()) {
-                        case R.id.nav_control:
-                            selectedFragment = new ControlFragment();
-                            break;
-                        case R.id.nav_report:
-                            selectedFragment = new ReportFragment();
-                            break;
-                        case R.id.nav_about:
-                            selectedFragment = new AboutFragment();
-                            break;
+                    if (itemId == R.id.nav_control) {
+                        selectedFragment = new ControlFragment();
+                    } else if (itemId == R.id.nav_report) {
+                        selectedFragment = new ReportFragment();
+                    } else if (itemId == R.id.nav_about) {
+                        selectedFragment = new AboutFragment();
                     }
 
                     if (selectedFragment != null) {
@@ -59,12 +36,26 @@ public class PrincipalActivity extends AppCompatActivity {
                                 .replace(R.id.fragment_container, selectedFragment)
                                 .commit();
                     }
-
                     return true;
                 }
             };
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
 
+        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
+        bottomNav.setOnItemSelectedListener(navListener);
+
+        // Opcionalmente, establecer el fragmento inicial
+        if (savedInstanceState == null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragment_container, new ControlFragment())
+                    .commit();
+        }
+    }
 
     private void sendToLCD(String message) {
         // Aquí iría la lógica para enviar mensajes al LCD via WiFi
